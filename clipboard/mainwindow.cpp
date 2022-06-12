@@ -91,7 +91,13 @@ void MainWindow::loginWeb()
     if (nullptr == serverUrlAndHost)
         return;
     serverPath = new QString(serverUrlAndHost);
-    auto url = QUrl("http://" + *serverPath);
+    QUrl url;
+    if (this->token) {
+       url = QUrl("http://" + *serverPath + "?token=" + *this->token);
+    } else {
+       url = QUrl("http://" + *serverPath);
+    }
+
     QNetworkRequest req;
     req.setUrl(url);
     req.setHeader(QNetworkRequest::UserAgentHeader, "Clipb0ard");

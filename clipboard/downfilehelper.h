@@ -4,6 +4,7 @@
 #include <QString>
 #include <QNetworkAccessManager>
 #include <QApplication>
+#include <QtCore>
 
 class DownFileHelper : public QObject
 {
@@ -14,10 +15,13 @@ public:
     ~DownFileHelper();
 private slots:
     void readingReadyBytesToFile();
+    void downloadFinish(QNetworkReply *reply);
 private:
     QString url, fileName;
     QNetworkAccessManager *downloadMgr;
     QNetworkReply *downloadReply;
+    QFile *currentFile;
+
     void downloadFile();
 };
 

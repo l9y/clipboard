@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(clipboard VERSION 0.1 LANGUAGES CXX)
 
-set(CMAKE_OSX_ARCHITECTURES "x86_64")
+#set(CMAKE_OSX_ARCHITECTURES "x86_64")
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 

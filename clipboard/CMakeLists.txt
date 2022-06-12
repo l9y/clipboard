@@ -13,6 +13,12 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
+set(MACOSX_BUNDLE_ICON_FILE "AppIcon.icns")
+set(app_icon_macos "${CMAKE_CURRENT_SOURCE_DIR}/AppIcon.icns")
+set_source_files_properties(${app_icon_macos} PROPERTIES
+        MACOSX_PACKAGE_LOCATION "Resources")
+
 set(CMAKE_PREFIX_PATH "/Users/zhiyuan/Qt/6.3.0/macos/lib/cmake")
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Network WebSockets Gui Core)
@@ -34,6 +40,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(clipboard
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        ${app_icon_macos}
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET clipboard APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -65,7 +72,7 @@ target_link_libraries(clipboard PRIVATE
     Qt${QT_VERSION_MAJOR}::WebSockets)
 
 set_target_properties(clipboard PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+    MACOSX_BUNDLE_GUI_IDENTIFIER com.zhiyuan.flyclipboard
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE

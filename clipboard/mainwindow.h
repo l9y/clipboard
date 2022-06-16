@@ -5,6 +5,7 @@
 #include <QNetworkAccessManager>
 #include <QtCore/QObject>
 #include <QtWebSockets/QWebSocket>
+#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -46,6 +47,7 @@ private slots:
 
 private:
     QWebSocket m_webSocket;
+    QSettings settings;
     void connectWs();
 
 };

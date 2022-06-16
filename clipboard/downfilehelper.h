@@ -21,7 +21,6 @@ private:
     QNetworkAccessManager *downloadMgr;
     QNetworkReply *downloadReply;
     QFile *currentFile;
-
     void downloadFile();
 };
 

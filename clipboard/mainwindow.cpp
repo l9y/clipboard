@@ -32,15 +32,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btnConnect_clicked()
 {
-     loginWeb();
+    try {
+        loginWeb();
+    } catch (...) {
+    }
 }
 
 
 
 void MainWindow::initWithApp(QApplication* app)
 {
+
     this->app = app;
 
+    auto lastToken = this->settings.value("token").toString();
+    if (lastToken != nullptr && lastToken.size() > 0) {
+        this->token = new QString(lastToken);
+    }
     this->ui->label->setText(QString("Please enter the server address\nsuch as:192.168.0.2:5050"));
 
     connect(QApplication::clipboard(), SIGNAL(dataChanged()),this,SLOT(onClipboardDataChanged()));
@@ -118,7 +126,10 @@ void MainWindow::networkFinish(QNetworkReply *response)
         if (o.contains("token")) {
             QJsonValue value = o.value("token");
             if (value.isString()) {
+                auto valStr = value.toString();
                 this->token = new QString(value.toString());
+                settings.setValue("token", valStr);
+                settings.sync();
             }
         }
         if (o.contains("ws")) {
@@ -129,6 +140,8 @@ void MainWindow::networkFinish(QNetworkReply *response)
         }
     } else {
         // json error
+        response->deleteLater();
+        return;
     }
     response->deleteLater();
     this->connectWs();

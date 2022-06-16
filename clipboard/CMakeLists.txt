@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(clipboard VERSION 0.1 LANGUAGES CXX)
+project(clipboard VERSION 1.0.1 LANGUAGES CXX)
 
-#set(CMAKE_OSX_ARCHITECTURES "x86_64")
+set(CMAKE_OSX_ARCHITECTURES "x86_64")
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -19,7 +19,7 @@ set(app_icon_macos "${CMAKE_CURRENT_SOURCE_DIR}/AppIcon.icns")
 set_source_files_properties(${app_icon_macos} PROPERTIES
         MACOSX_PACKAGE_LOCATION "Resources")
 
-set(CMAKE_PREFIX_PATH "/Users/zhiyuan/Qt/6.3.0/macos/lib/cmake")
+#set(CMAKE_PREFIX_PATH "/usr/local/Qt-6.3.0/lib/cmake")
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Network WebSockets Gui Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Network WebSockets Gui Core)
